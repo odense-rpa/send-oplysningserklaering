@@ -12,6 +12,8 @@
             "console": "integratedTerminal",
             "justMyCode": false,
             "args": [
+                "--excel-file", "./Regler.xlsx",
+                "--word-template-path", "./Send oplysningserklæring"
             ]
         },
         {
@@ -22,7 +24,8 @@
             "console": "integratedTerminal",
             "justMyCode": false,
             "args": [
-                "--queue"
+                "--queue",
+                "--excel-file", "./Regler.xlsx"
             ]
         }
     ]
