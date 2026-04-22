@@ -147,8 +147,8 @@ def _upload_til_nexus(borger, visning, regel: dict, pdf_path: Path):
         borger=borger,
         forløb=grundforløb,
         fil=pdf_path.read_bytes(),
-        filnavn=f"{regel['Henvendelsestype']} {datetime.now().strftime('%d-%m-%Y')}.pdf",
-        titel=f"{regel['Henvendelsestype']} {datetime.now().strftime('%d-%m-%Y')}",
+        filnavn=f"Oplysningserklæring - {regel['Henvendelsestype']} {datetime.now().strftime('%d-%m-%Y')}.pdf",
+        titel=f"Oplysningserklæring - {regel['Henvendelsestype']} {datetime.now().strftime('%d-%m-%Y')}",
         noter=None,
         modtaget=datetime.now(),
     )
