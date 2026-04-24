@@ -222,8 +222,8 @@ wheels = [
 
 [[package]]
 name = "datafordeler"
-version = "0.1.0"
-source = { git = "https://github.com/odense-rpa/datafordeler.git?rev=main#d99f85444267c224765aeda74553084da483ba1f" }
+version = "0.1.1"
+source = { git = "https://github.com/odense-rpa/datafordeler.git?rev=main#8bc11a7877955a583860a0f42974f617144d92f4" }
 dependencies = [
     { name = "dotenv" },
     { name = "httpx" },
