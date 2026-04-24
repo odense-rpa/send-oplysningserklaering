@@ -122,11 +122,15 @@ def _konverter_og_send_digital_post(
     )
     pdf_path.write_bytes(response.content)
 
+    adresse, post_nr = datafordeler.hent_adresse_til_sbsip(cpr=cpr)
+
     sbsip.send_digital_post(
         cpr=cpr,
         overskrift="Sådan behandler vi dine personoplysninger",
         beskrivelse="",
         vedhæftet_fil=pdf_path,
+        adresse=adresse,
+        post_nr=post_nr
     )
 
     return pdf_path
