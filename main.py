@@ -13,7 +13,7 @@ from automation_server_client import (
     Credential,
     WorkItemStatus,
 )
-from datafordeler import Datafordeler as DatafordelerClient
+from datafordeler import DatafordelerGraphQL
 from datetime import datetime, timedelta
 from kmd_nexus_client import NexusClientManager
 from kmd_nexus_client.utils import sanitize_cpr
@@ -22,7 +22,7 @@ from odk_tools.tracking import Tracker
 from pathlib import Path
 from process.config import load_excel_mapping, get_excel_mapping
 
-datafordeler: DatafordelerClient
+datafordeler: DatafordelerGraphQL
 proces_navn = "Send oplysningserklæring"
 
 
@@ -40,8 +40,7 @@ def _hent_borger_oplysninger(data: dict):
     """Hent borgeroplysninger fra datafordeler og Nexus."""
     cpr = sanitize_cpr(data["patients"][0].get("patientIdentifier").get("identifier"))
 
-    person_oplysninger = datafordeler.hent_personoplysninger(cpr=str(cpr))
-    if person_oplysninger.get("Person").get("status") == "doed":
+    if datafordeler.hent_person(str(cpr)).er_død:
         return None
 
     borger = nexus.borgere.hent_borger(borger_cpr=cpr)
@@ -122,7 +121,7 @@ def _konverter_og_send_digital_post(
     )
     pdf_path.write_bytes(response.content)
 
-    adresse, post_nr = datafordeler.hent_adresse_til_sbsip(cpr=cpr)
+    adresse, post_nr = datafordeler.hent_person(cpr).sbsip_adresse()
 
     sbsip.send_digital_post(
         cpr=cpr,
@@ -246,12 +245,11 @@ if __name__ == "__main__":
     nexus_credential = Credential.get_credential("KMD Nexus - produktion")
     tracking_credential = Credential.get_credential("Odense SQL Server")
     SBSip_credential = Credential.get_credential("SBSip - produktion")
+    datafordeler_credential = Credential.get_credential("Datafordeler")
 
-    # Overskriv stien i forbindelse med udvikling
-    certifikat_sti = os.getenv("CERTIFIKATER", "/certifikater")
-    datafordeler = DatafordelerClient(
-        certifikat_sti=os.path.join(certifikat_sti, "datafordeler.crt"),
-        certifikat_nøglefil=os.path.join(certifikat_sti, "datafordeler.key"),
+    datafordeler = DatafordelerGraphQL(
+        client_id=datafordeler_credential.username,
+        client_secret=datafordeler_credential.password,
     )
 
     nexus = NexusClientManager(
