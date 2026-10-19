@@ -18,5 +18,5 @@ dependencies = [
 automation-server-client = { git = "https://github.com/odense-rpa/automation-server-client.git", tag = "v0.2.1" }
 datafordeler = { git = "https://github.com/odense-rpa/datafordeler.git", rev = "main" }
 odk-tools = { git = "https://github.com/odense-rpa/odk-tools.git", rev = "master" }
-kmd-nexus-client = { git = "https://github.com/odense-rpa/nexus-client.git", rev = "main" }
+kmd-nexus-client = { git = "https://github.com/odense-rpa/nexus-client.git", rev = "a93da4866c98bc6e8605989359b2db69f8bb5bdb" }
 sbsip = { git = "https://github.com/odense-rpa/sbsip.git" }

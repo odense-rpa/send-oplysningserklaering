@@ -3,3 +3,7 @@
 Regler.xlsx
 /Send oplysningserklæring/*
 /certifikater/*
+
+# Python-cachefiler
+__pycache__/
+*.py[cod]
