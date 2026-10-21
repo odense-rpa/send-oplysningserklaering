@@ -22,7 +22,7 @@ Robotten sender automatisk oplysningserklæringer til borgere som digital post, 
 - Adgang til **KMD Nexus** (produktion)
 - Adgang til **SBSip** (digital post, produktion)
 - Adgang til **Odense SQL Server** (sporingsdatabase)
-- Adgang til **Datafordeler** (inkl. klientcertifikater)
+- Adgang til **Datafordeler** via credential `Datafordeler` i Automation Server
 - Word-til-PDF-konverteringstjeneste kørende på `http://rpa-ats.odknet.dk:8331/convert`
 
 ## Installation
@@ -46,7 +46,6 @@ Derudover kræves følgende miljøvariabler:
 | `ATS_URL` | URL til Automation Server API |
 | `ATS_TOKEN` | Bearer token til Automation Server |
 | `ATS_WORKQUEUE_OVERRIDE` | Tilsidesæt arbejdskø-ID (valgfri) |
-| `CERTIFIKATER` | Sti til mappe med Datafordeler TLS-certifikater (`datafordeler.crt` og `datafordeler.key`) — standard: `/certifikater` |
 
 Word-skabeloner placeres i mappen `Send oplysningserklæring` (kan tilpasses med `--word-template-path`). Mapping fra skemanavne til brevskabeloner defineres i `Regler.xlsx`.
 
@@ -62,7 +61,7 @@ uv run python main.py           # Behandl arbejdskøen
 | Pakke | Formål |
 |---|---|
 | `automation-server-client` | Arbejdskøstyring, credential-hentning og Automation Server-integration |
-| `datafordeler` | Opslag af borgerdata og adresse via Datafordeler med certifikatbaseret autentificering |
+| `datafordeler` | Opslag af borgerdata og adresse via Datafordelerens GraphQL-API |
 | `odk-tools` | Opgavesporing via Tracker-hjælpeprogrammet |
 | `kmd-nexus-client` | Interaktion med KMD Nexus: borgerregistre, forløb, aktivitetslister og dokumentupload |
 | `openpyxl` | Læsning af Excel-regelfilen `Regler.xlsx` |
