@@ -126,7 +126,7 @@ def _konverter_og_send_digital_post(
     sbsip.send_digital_post(
         cpr=cpr,
         overskrift="Sådan behandler vi dine personoplysninger",
-        beskrivelse="",
+        beskrivelse="Odense Kommune behandler personoplysninger om dig. Du kan læse mere om dette i fanen ved siden af denne/i den vedhæftede fil.",
         vedhæftet_fil=pdf_path,
         adresse=adresse,
         post_nr=post_nr
